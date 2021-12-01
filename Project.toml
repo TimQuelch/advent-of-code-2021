@@ -1,0 +1,5 @@
+[deps]
+Chain = "8be319e6-bccf-4806-a6f7-6fae938471bc"
+DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
