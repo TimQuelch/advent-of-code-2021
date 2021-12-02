@@ -4,6 +4,8 @@ using Chain
 using DSP
 using InlineTest
 
+# Calculate differences between each successive pair of values, then count how
+# many are positive
 function part1(d)
     @chain d begin
         diff
@@ -11,6 +13,9 @@ function part1(d)
     end
 end
 
+# Use a convolution with a uniform 3 wide window to calculate the moving window.
+# This is slightly overkill, but this is where my digital signal processing
+# brain went to for a solution
 function part2(d)
     N = 3
     @chain d begin

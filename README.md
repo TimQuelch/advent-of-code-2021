@@ -4,10 +4,10 @@ My solutions to the [Advent of Code 2021](https://adventofcode.com) in Julia
 
 ## Running
 
-Problems can be solved from the REPL
+Problems can be solved from the REPL from the repository directory.
 
 ``` julia
-] activate .
+] activate . # equivalently: using Pkg; Pkg.activate(".")
 using AdventOfCode
 solve() # solves all implemented problems with my data
 solve(2) # solves a specific day with my data

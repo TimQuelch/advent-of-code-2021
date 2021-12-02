@@ -1,15 +1,16 @@
 module d02
 
 using Chain
-using DSP
 using InlineTest
 
+# Lookup table for directions
 const lookup = Dict(
     "forward" => (1, 0),
     "up" => (0, -1),
     "down" => (0, 1),
 )
 
+# Simply convert all to vectors and then sum them all up
 function part1(d)
     vec =  mapreduce(
         t -> lookup[t[1]] .* t[2],
@@ -19,6 +20,8 @@ function part1(d)
     return prod(vec)
 end
 
+# The cumulative sum of the 'aim' is the aim after any change. Multiplying this by the forward
+# motion gives us the vertical motion. Summing all vectors gives the final position
 function part2(d)
     v = mapreduce(
         t -> collect(lookup[t[1]] .* t[2]),
