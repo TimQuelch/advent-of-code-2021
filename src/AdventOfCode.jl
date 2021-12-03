@@ -4,7 +4,7 @@ export solve
 using InlineTest
 
 # The days which have been solved
-days = [1, 2]
+days = [1, 2, 3]
 
 # Generate lists of files and modules
 dstrs = map(d -> "d" * lpad(d, 2, '0'), days)
