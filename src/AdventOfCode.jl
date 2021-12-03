@@ -2,6 +2,7 @@ module AdventOfCode
 export solve
 
 using InlineTest
+using DataStructures
 
 # The days which have been solved
 days = [1, 2, 3]
@@ -22,6 +23,6 @@ solvefnlookup = Dict(days .=> map(mod -> @eval($mod.solve), modules))
 
 # Functions for solving
 solve(d) = open(solvefnlookup[d], inputlookup[d])
-solve() = Dict(days .=> solve.(days))
+solve() = OrderedDict(days .=> solve.(days))
 
 end
