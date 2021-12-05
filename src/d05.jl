@@ -11,23 +11,18 @@ interval(t) = interval(t...)
 # Test if a line is either horizontal or vertical
 isstraight(p) = p[1][1] == p[1][2] || p[2][1] == p[2][2]
 
-function straight_line_points(p)
-    @chain p begin
-        filter(isstraight, _)
-        map(p -> (interval(p[1]), interval(p[2])), _)
-        map(p -> Iterators.product(p...), _)
+function straight_line_points(ps)
+    map(filter(isstraight, ps)) do p
+        Iterators.product(interval(p[1]), interval(p[2]))
     end
 end
 
-
-function all_line_points(p)
-    slinepoints = straight_line_points(p) # Straight line points
+function all_line_points(ps)
+    slinepoints = straight_line_points(ps) # Straight line points
 
     # Diagonal line points
-    dlinepoints = @chain p begin
-        filter(!isstraight, _)
-        map(p -> (interval(p[1]), interval(p[2])), _)
-        map(p -> zip(p...), _)
+    dlinepoints = map(filter(!isstraight, ps)) do p
+        zip(interval(p[1]), interval(p[2]))
     end
 
     # Combine straight and diagonal lines
