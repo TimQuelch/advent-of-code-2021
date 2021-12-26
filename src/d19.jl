@@ -2,8 +2,80 @@ module d19
 
 using Chain
 using InlineTest
+using LinearAlgebra
+using StatsBase
 
-part1(d) = nothing
+function calcrotations()
+    permutations = [
+        [1, 2, 3],
+        [1, 3, 2],
+        [2, 1, 3],
+        [2, 3, 1],
+        [3, 1, 2],
+        [3, 2, 1],
+    ]
+    negatives = map([
+        [0, 0, 0],
+        [0, 0, 1],
+        [0, 1, 0],
+        [0, 1, 1],
+        [1, 0, 0],
+        [1, 0, 1],
+        [1, 1, 0],
+        [1, 1, 1],
+    ]) do x
+        2 .* x .- 1
+    end
+    @chain begin
+        Iterators.product(permutations, negatives)
+        map(_) do (p, n)
+            m = diagm(n)
+            for r in eachcol(m)
+                permute!(r, p)
+            end
+            return m
+        end
+        filter(m -> det(m) == 1, _)
+    end
+end
+const rotations = calcrotations()
+
+function distmatrix(ps)
+    map(Iterators.product(ps, ps)) do (a, b)
+        norm(a .- b)
+    end
+end
+
+centroid(ps) = reduce(+, ps) ./ length(ps)
+
+function rand_submatrix(dmx, n)
+    @assert size(dmx, 1) == size(dmx, 2)
+    is = sample(1:size(dmx, 1), n, replace=false, ordered=true)
+    return @view dmx[is, is]
+end
+
+function find_matching_points(ps1, ps2)
+    N = 4
+    dmx1, dmx2 = distmatrix.((ps1, ps2))
+    for _ in 1:1000
+        is1 = sample(1:size(dmx1, 1), n, replace=false, ordered=true)
+        is2 = sample(1:size(dmx2, 1), n, replace=false, ordered=true)
+        if isapprox(det(@view dmx1[is1, is1]), det(@view dmx2[is2, is2]))
+            return [is1, is2]
+        end
+    end
+    @info "No matches found"
+end
+
+function part1(d)
+    beacons = d[1]              # Accept the first scanner as truth
+    for i in 2:length(d)
+        for j in 1:1000
+            1
+        end
+    end
+end
+
 part2(d) = nothing
 
 function parseinput(io)
@@ -12,7 +84,6 @@ function parseinput(io)
             @chain l begin
                 split(",")
                 map(x -> parse(Int, x), _)
-                tuple(_...)
             end
         end
     end
