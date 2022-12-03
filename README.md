@@ -8,11 +8,11 @@ Problems can be solved from the REPL from the repository directory.
 
 ``` julia
 ] activate . # equivalently: using Pkg; Pkg.activate(".")
-using AdventOfCode
+using AdventOfCode2021
 solve() # solves all implemented problems with my data
 solve(2) # solves a specific day with my data
-AdventOfCode.d01.solve(open("path/to/data/file")) # solves day 1 with a specified data file
-AdventOfCode.d02.solve(IOBuffer("datastring")) # solves day 2 with a data string
+AdventOfCode2021.d01.solve(open("path/to/data/file")) # solves day 1 with a specified data file
+AdventOfCode2021.d02.solve(IOBuffer("datastring")) # solves day 2 with a data string
 ```
 
 ## Testing
@@ -26,7 +26,7 @@ To run all tests
 To run specific tests for a specific day
 ``` julia
 using ReTest
-using AdventOfCode
-AdventOfCode.runtests() # All tests
-AdventOfCode.d01.runtests() # Day 1 tests
+using AdventOfCode2021
+AdventOfCode2021.runtests() # All tests
+AdventOfCode2021.d01.runtests() # Day 1 tests
 ```

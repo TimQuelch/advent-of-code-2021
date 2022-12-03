@@ -1,4 +1,4 @@
 using ReTest
-using AdventOfCode
+using AdventOfCode2021
 
-retest(AdventOfCode)
+retest(AdventOfCode2021)
